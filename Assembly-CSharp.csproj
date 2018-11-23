@@ -53,7 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Manager\Controller_Level_Manager.cs" />
+     <Compile Include="Assets\Scripts\Manager\Controller_Level_Bounds_Manager.cs" />
      <Compile Include="Assets\Scripts\Player\Controller_Player.cs" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>C:/Users/Martijn van den Berk/Documents/Killer App Projecten/Project - Game/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
