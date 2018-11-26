@@ -1,0 +1,10 @@
+{
+    "name": "Logic",
+    "references": [
+        "Structs"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}

@@ -1,0 +1,14 @@
+{
+    "name": "UnityTests",
+    "references": [
+        "Logic"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}
