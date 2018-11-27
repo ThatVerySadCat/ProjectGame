@@ -1,8 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace Structs
 {
+    /// <summary>
+    /// A temporary version of the EnemyData struct which is to be used within the Unity editor and later replaced by the EnemyData struct.
+    /// </summary>
+    [Serializable]
+    public struct EnemyDataTemp
+    {
+        public float Rotation;
+        public float SpawnX;
+        public float SpawnY;
+        public int Difficulty;
+        public List<ProjectileDataTemp> ProjectileList;
+        public string Name;
+    }
+
     public struct EnemyData
     {
         /// <summary>

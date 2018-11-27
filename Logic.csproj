@@ -54,9 +54,12 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Enemy\Controller_Enemy.cs" />
+     <Compile Include="Assets\Scripts\Manager\Controller_Enemy_Spawn_Manager.cs" />
      <Compile Include="Assets\Scripts\Manager\Controller_Level_Bounds_Manager.cs" />
      <Compile Include="Assets\Scripts\Player\Controller_Player.cs" />
      <Compile Include="Assets\Scripts\Player\Controller_Player_Camera.cs" />
+     <Compile Include="Assets\Scripts\Projectiles\ProjectileBase.cs" />
+     <Compile Include="Assets\Scripts\Projectiles\ProjectileStandard.cs" />
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
  </Reference>

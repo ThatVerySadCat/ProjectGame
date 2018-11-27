@@ -53,7 +53,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Unity Tests\Player Test Script.cs" />
+     <Compile Include="Assets\Unity Tests\Player Tests\Accelerate Axis Test.cs" />
+     <Compile Include="Assets\Unity Tests\Player Tests\Decelerate Axis Test.cs" />
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
  </Reference>

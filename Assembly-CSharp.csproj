@@ -53,9 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Structs\EnemyData.cs" />
-     <Compile Include="Assets\Structs\ProjectileData.cs" />
-     <Compile Include="Assets\Structs\ScoreData.cs" />
+     <Compile Include="Assets\Controller_Enemy_Spawn_Manager.cs" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>C:/Users/Martijn van den Berk/Documents/Killer App Projecten/Project - Game/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
@@ -301,6 +299,8 @@
  </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Structs.csproj">
+      <Project>{B81CA026-06D8-84A6-B6E2-65B052757752}</Project>      <Name>Structs</Name>    </ProjectReference>
     <ProjectReference Include="Logic.csproj">
       <Project>{754C804E-9154-2FE1-CB25-6A9DBC1D8F25}</Project>      <Name>Logic</Name>    </ProjectReference>
   </ItemGroup>
