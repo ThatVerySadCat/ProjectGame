@@ -53,7 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Controller_Enemy_Spawn_Manager.cs" />
+     <Compile Include="Assets\Controller_Difficulty_Manager.cs" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>C:/Users/Martijn van den Berk/Documents/Killer App Projecten/Project - Game/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>

@@ -101,6 +101,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   accelerationSpeed: 50
   maxMovementSpeed: 5
+  onHitShakeDuration: 0.3
+  onHitShakeMagnitude: 0.2
+  maxHealth: 100
 --- !u!212 &212814484085300042
 SpriteRenderer:
   m_ObjectHideFlags: 1

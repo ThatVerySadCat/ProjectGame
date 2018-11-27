@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 using System;
 using System.Collections.Generic;
@@ -19,10 +20,10 @@ public class Controller_Player : MonoBehaviour
     }
 
     [Header("Movement")]
-    [Tooltip("The speed at which the player character accelerates and decelerates, in Units/Second^2.")]
-    public float accelerationSpeed = 1.0f;
-    [Tooltip("The maximum allowed speed for both positive and negative directions, in Units/Second.")]
-    public float maxMovementSpeed = 1.0f;
+    [SerializeField, Tooltip("The speed at which the player character accelerates and decelerates, in Units/Second^2.")]
+    private float accelerationSpeed = 1.0f;
+    [SerializeField, Tooltip("The maximum allowed speed for both positive and negative directions, in Units/Second.")]
+    private float maxMovementSpeed = 1.0f;
 
     /// <summary>
     /// The bounds of the level, in Units.
@@ -37,9 +38,35 @@ public class Controller_Player : MonoBehaviour
     /// </summary>
     private Vector2 currentMovementSpeed = Vector2.zero;
 
+    public int CurrentHealth
+    {
+        get;
+        private set;
+    }
+    public int MaxHealth
+    {
+        get
+        {
+            return maxHealth;
+        }
+    }
+
+    [Header("Combat")]
+    [SerializeField]
+    private float onHitShakeDuration = 1.0f;
+    [SerializeField]
+    private float onHitShakeMagnitude = 1.0f;
+    [SerializeField]
+    private int maxHealth = 100;
+
+    private Controller_Player_Camera playerCamera;
+
 	void Awake ()
     {
         localTransform = this.transform;
+
+        CurrentHealth = maxHealth;
+        playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Controller_Player_Camera>();
 	}
 
     void Start()
@@ -57,6 +84,23 @@ public class Controller_Player : MonoBehaviour
         currentMovementSpeed = UpdateMovementSpeed(up, down, left, right, accelerationSpeed, Time.deltaTime, maxMovementSpeed, currentMovementSpeed);
         localTransform.position = UpdatePosition(levelBounds, currentMovementSpeed, localTransform.position);
 	}
+
+    /// <summary>
+    /// This function has been made internal for testing purposes but should be treated as a private function.
+    /// </summary>
+    public void Damage(int damageAmount)
+    {
+        CurrentHealth -= damageAmount;
+        if(CurrentHealth <= 0)
+        {
+            SceneManager.LoadScene(0);
+            SceneManager.SetActiveScene(SceneManager.GetSceneAt(0));
+        }
+        else
+        {
+            playerCamera.Shake(onHitShakeDuration, onHitShakeMagnitude);
+        }
+    }
 
     /// <summary>
     /// This function has been made internal for testing purposes but should be treated as a private function.
