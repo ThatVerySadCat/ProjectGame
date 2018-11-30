@@ -1,0 +1,15 @@
+{
+    "name": "EnemyManagerTests",
+    "references": [
+        "Logic",
+        "Structs"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}

@@ -53,7 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Controller_Difficulty_Manager.cs" />
+     <Compile Include="Assets\Controller_Restart_Button.cs" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>C:/Users/Martijn van den Berk/Documents/Killer App Projecten/Project - Game/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
@@ -299,10 +299,14 @@
  </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="DALInterfaces.csproj">
+      <Project>{9D045D0C-5F0B-D97A-EB43-9DB087A5605C}</Project>      <Name>DALInterfaces</Name>    </ProjectReference>
     <ProjectReference Include="Structs.csproj">
       <Project>{B81CA026-06D8-84A6-B6E2-65B052757752}</Project>      <Name>Structs</Name>    </ProjectReference>
     <ProjectReference Include="Logic.csproj">
       <Project>{754C804E-9154-2FE1-CB25-6A9DBC1D8F25}</Project>      <Name>Logic</Name>    </ProjectReference>
+    <ProjectReference Include="DAL.csproj">
+      <Project>{B76AE0BC-E4AD-6695-0961-EFD69152CF48}</Project>      <Name>DAL</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

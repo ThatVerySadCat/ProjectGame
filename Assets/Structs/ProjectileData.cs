@@ -15,7 +15,7 @@ namespace Structs
         public float RelativeSpawnX;
         public float RelativeSpawnY;
         public int ProjectileType;
-        public List<object> ParameterList;
+        public List<float> ParameterList;
     }
 
     public struct ProjectileData
@@ -63,7 +63,7 @@ namespace Structs
         /// <summary>
         /// A ReadOnlyCollection containing the list of projectile data.
         /// </summary>
-        public ReadOnlyCollection<object> ParameterList
+        public ReadOnlyCollection<float> ParameterList
         {
             get
             {
@@ -74,9 +74,9 @@ namespace Structs
         /// <summary>
         /// A list containing the ProjectileData belonging to the enemy.
         /// </summary>
-        private List<object> parameterList;
+        private List<float> parameterList;
 
-        public ProjectileData(float _relativeMovementDirectionX, float _relativeMovementDirectionY, float _relativeSpawnX, float _relativeSpawnY, int _projectileType, List<object> _parameterList)
+        public ProjectileData(float _relativeMovementDirectionX, float _relativeMovementDirectionY, float _relativeSpawnX, float _relativeSpawnY, int _projectileType, List<float> _parameterList)
         {
             RelativeMovementDirectionX = _relativeMovementDirectionX;
             RelativeMovementDirectionY = _relativeMovementDirectionY;

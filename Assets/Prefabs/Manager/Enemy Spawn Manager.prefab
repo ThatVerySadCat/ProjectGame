@@ -52,6 +52,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sampleList: []
-  spawnDelay: 2
-  spawnDelayAcceleration: 0.005
+  startSpawnDelay: 2
   enemyObj: {fileID: 1017329766179280, guid: 51aa62b9f1051b0478278d3b06fde5d1, type: 2}
+  spawnDelayDifficultyAcceleration: 0.1

@@ -108,9 +108,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0df784029ba39144a28cc5427bfe78e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireDelay: 1.1
+  startFireDelay: 1.5
+  fireDelayDifficultyModifier: 0.1
   projectileObjList:
   - {fileID: 1502830171529430, guid: 01a4891d7113a064caac4c5c3640ea3e, type: 2}
+  - {fileID: 1223874725849232, guid: 5c3a70783f1b00e419cd069202ef74a2, type: 2}
 --- !u!212 &212293673690123314
 SpriteRenderer:
   m_ObjectHideFlags: 1

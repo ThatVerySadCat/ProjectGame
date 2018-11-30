@@ -1,6 +1,7 @@
 {
-    "name": "Logic",
+    "name": "DAL",
     "references": [
+        "DALInterfaces",
         "Structs"
     ],
     "optionalUnityReferences": [],

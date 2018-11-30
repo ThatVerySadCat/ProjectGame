@@ -8,6 +8,11 @@ TagManager:
   - Enemy
   - Enemy Spawn Manager
   - Difficulty Manager
+  - Score Manager
+  - Enemy Manager
+  - Pause Manager
+  - Failed To Pause Text
+  - After Death Score Overlay
   layers:
   - Default
   - TransparentFX

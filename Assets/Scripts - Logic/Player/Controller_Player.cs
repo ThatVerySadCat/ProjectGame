@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("UnityTests")] // This class's internals have been made visible to UnityTests to allow its functions to be unit tested.
+[assembly: InternalsVisibleTo("PlayerTests")] // This class's internals have been made visible to UnityTests to allow its functions to be unit tested.
 public class Controller_Player : MonoBehaviour
 {
     /// <summary>
@@ -38,11 +38,17 @@ public class Controller_Player : MonoBehaviour
     /// </summary>
     private Vector2 currentMovementSpeed = Vector2.zero;
 
+    /// <summary>
+    /// The players current health.
+    /// </summary>
     public int CurrentHealth
     {
         get;
         private set;
     }
+    /// <summary>
+    /// The players maximum health.
+    /// </summary>
     public int MaxHealth
     {
         get
@@ -52,14 +58,27 @@ public class Controller_Player : MonoBehaviour
     }
 
     [Header("Combat")]
-    [SerializeField]
+    [SerializeField, Tooltip("The amount of time the camera shakes upon the player being hit, in Seconds.")]
     private float onHitShakeDuration = 1.0f;
-    [SerializeField]
+    [SerializeField, Tooltip("The amount by which the camera shakes, in Units.")]
     private float onHitShakeMagnitude = 1.0f;
-    [SerializeField]
+    [SerializeField, Tooltip("The amount of health the player starts with.")]
     private int maxHealth = 100;
 
+    /// <summary>
+    /// A reference to the player cameras script component.
+    /// </summary>
     private Controller_Player_Camera playerCamera;
+
+    // Pause
+    /// <summary>
+    /// A reference to the failed to pause texts script component.
+    /// </summary>
+    private Controller_Failed_To_Pause failedToPause;
+    /// <summary>
+    /// A reference to the pause managers script component.
+    /// </summary>
+    private Controller_Pause_Manager pauseManager;
 
 	void Awake ()
     {
@@ -67,6 +86,10 @@ public class Controller_Player : MonoBehaviour
 
         CurrentHealth = maxHealth;
         playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Controller_Player_Camera>();
+
+        failedToPause = GameObject.FindGameObjectWithTag("Failed To Pause Text").GetComponent<Controller_Failed_To_Pause>();
+        failedToPause.gameObject.SetActive(false);
+        pauseManager = GameObject.FindGameObjectWithTag("Pause Manager").GetComponent<Controller_Pause_Manager>();
 	}
 
     void Start()
@@ -74,32 +97,59 @@ public class Controller_Player : MonoBehaviour
         levelBounds = GameObject.FindGameObjectWithTag("Level Bounds Manager").GetComponent<Controller_Level_Bounds_Manager>().LevelBounds;
     }
 
-	void Update ()
+    void Update()
     {
-        bool up = Input.GetButton("Up");
-        bool down = Input.GetButton("Down");
-        bool left = Input.GetButton("Left");
-        bool right = Input.GetButton("Right");
+        if (CurrentHealth > 0.0f)
+        {
+            bool pause = Input.GetButtonDown("Pause");
+            if (!Pause(pause))
+            {
+                failedToPause.gameObject.SetActive(true);
+            }
 
-        currentMovementSpeed = UpdateMovementSpeed(up, down, left, right, accelerationSpeed, Time.deltaTime, maxMovementSpeed, currentMovementSpeed);
-        localTransform.position = UpdatePosition(levelBounds, currentMovementSpeed, localTransform.position);
-	}
+            bool up = Input.GetButton("Up");
+            bool down = Input.GetButton("Down");
+            bool left = Input.GetButton("Left");
+            bool right = Input.GetButton("Right");
+
+            currentMovementSpeed = UpdateMovementSpeed(up, down, left, right, accelerationSpeed, Time.deltaTime, maxMovementSpeed, currentMovementSpeed);
+            localTransform.position = UpdatePosition(levelBounds, currentMovementSpeed, localTransform.position);
+        }
+
+    }
 
     /// <summary>
-    /// This function has been made internal for testing purposes but should be treated as a private function.
+    /// Lower the players health by the given damageAmount and kill the player in case its health reaches 0.
     /// </summary>
     public void Damage(int damageAmount)
     {
         CurrentHealth -= damageAmount;
-        if(CurrentHealth <= 0)
+        playerCamera.Shake(onHitShakeDuration, onHitShakeMagnitude);
+    }
+
+    /// <summary>
+    /// This function has been made internal for testing purposes but should be treated as a private function.
+    /// Pauses, or unpauses, the game based on the given parameter.
+    /// </summary>
+    /// <param name="pause">Pause, or unpause, the game?</param>
+    /// <returns>Has an attempt to pause the game failed?</returns>
+    internal bool Pause(bool pause)
+    {
+        if (pause)
         {
-            SceneManager.LoadScene(0);
-            SceneManager.SetActiveScene(SceneManager.GetSceneAt(0));
+            if (pauseManager.IsPaused)
+            {
+                pauseManager.UnPause();
+
+                return true;
+            }
+            else
+            {
+                return pauseManager.Pause();
+            }
         }
-        else
-        {
-            playerCamera.Shake(onHitShakeDuration, onHitShakeMagnitude);
-        }
+
+        return true;
     }
 
     /// <summary>
@@ -149,13 +199,16 @@ public class Controller_Player : MonoBehaviour
     /// <returns>Returns either 1.0f, -1.0f or 0.0f based on the given parameters.</returns>
     internal float GetAccelerationDirection(bool positiveDirectionBtn, bool negativeDirectionBtn)
     {
-        if (positiveDirectionBtn)
+        if (positiveDirectionBtn ^ negativeDirectionBtn)
         {
-            return 1.0f;
-        }
-        if (negativeDirectionBtn)
-        {
-            return -1.0f;
+            if (positiveDirectionBtn)
+            {
+                return 1.0f;
+            }
+            else
+            {
+                return -1.0f;
+            }
         }
 
         return 0.0f;

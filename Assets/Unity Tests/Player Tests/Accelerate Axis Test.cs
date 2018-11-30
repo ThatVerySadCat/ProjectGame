@@ -64,7 +64,7 @@ public class AccelerateAxisTest
         float accelerationSpeed = 2.0f;
         float oldMovementSpeed = 1.0f;
         float deltaTime = 1.5f;
-        float expectedAxisSpeed = oldMovementSpeed + (accelerationSpeed * deltaTime);
+        float expectedAxisSpeed = oldMovementSpeed;
 
         float actualAxisSpeed = player.AccelerateAxisSpeed(true, true, accelerationSpeed, deltaTime, Mathf.Infinity, oldMovementSpeed);
 

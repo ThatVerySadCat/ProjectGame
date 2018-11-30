@@ -9,10 +9,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{FDB9898E-C5D1-DC98-38C3-45B2862DB8AD}</ProjectGuid>
+    <ProjectGuid>{DEE5B40F-4D24-EA25-6EA4-2B12FC9C6CD1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>UnityTests</AssemblyName>
+    <AssemblyName>PlayerTests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -352,8 +352,6 @@
   <ItemGroup>
     <ProjectReference Include="Logic.csproj">
       <Project>{754C804E-9154-2FE1-CB25-6A9DBC1D8F25}</Project>      <Name>Logic</Name>    </ProjectReference>
-    <ProjectReference Include="Structs.csproj">
-      <Project>{B81CA026-06D8-84A6-B6E2-65B052757752}</Project>      <Name>Structs</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

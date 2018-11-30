@@ -15,9 +15,15 @@ public class ProjectileStandard : ProjectileBase
         }
     }
 
+    protected override void StartWrapper()
+    {
+        currentSpeed = baseSpeed;
+        currentMovementDirection = baseMovementDirection;
+        levelBounds = GameObject.FindGameObjectWithTag("Level Bounds Manager").GetComponent<Controller_Level_Bounds_Manager>().LevelBounds;
+    }
     void Start()
     {
-        levelBounds = GameObject.FindGameObjectWithTag("Level Bounds Manager").GetComponent<Controller_Level_Bounds_Manager>().LevelBounds;
+        StartWrapper();
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -28,9 +34,9 @@ public class ProjectileStandard : ProjectileBase
         Destroy(this.gameObject);
     }
 
-    void Update()
+    protected override void UpdateWrapper()
     {
-        Vector3 newPosition = UpdatePosition(Time.deltaTime, baseSpeed, baseMovementDirection, localTransform.position);
+        Vector3 newPosition = UpdatePosition(Time.deltaTime, currentSpeed, currentMovementDirection, localTransform.position);
         if (IsOutOfBounds(levelBounds, newPosition))
         {
             Destroy(this.gameObject);
@@ -38,13 +44,18 @@ public class ProjectileStandard : ProjectileBase
 
         localTransform.position = newPosition;
     }
+    void Update()
+    {
+        UpdateWrapper();
+    }
 
     /// <summary>
-    /// Sets the needed variables for the projectile using the given parameters.
+    /// Sets the needed variables for the standard projectile using the given parameters.
     /// </summary>
     /// <param name="_baseMovementDirection">The direction in which the projectile must move.</param>
-    public void SetValues(Vector2 _baseMovementDirection)
+    public void SetValues(float _baseSpeed, Vector2 _baseMovementDirection)
     {
+        baseSpeed = _baseSpeed;
         baseMovementDirection = _baseMovementDirection;
     }
 

@@ -71,7 +71,7 @@ public class Controller_Player_Camera : MonoBehaviour
         {
             if (shakeDuration > shakeTimer)
             {
-                shakeTimer += Time.deltaTime;
+                shakeTimer += Time.unscaledDeltaTime;
                 shakeOffset = CalculateShakeOffset(shakeDuration, shakeMagnitude, shakeTimer);
             }
             else
@@ -158,8 +158,6 @@ public class Controller_Player_Camera : MonoBehaviour
         newPosition.x = offsetPercentage.x * maximumPositionOffset.x;
         newPosition.y = offsetPercentage.y * maximumPositionOffset.y;
         newPosition.z = zPosition;
-
-        Debug.Log(offsetPercentage.y + " | " + maximumPositionOffset.y);
 
         return newPosition;
     }

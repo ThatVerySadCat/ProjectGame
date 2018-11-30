@@ -53,15 +53,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Enemy\Controller_Enemy.cs" />
-     <Compile Include="Assets\Scripts\Manager\Controller_Difficulty_Manager.cs" />
-     <Compile Include="Assets\Scripts\Manager\Controller_Enemy_Spawn_Manager.cs" />
-     <Compile Include="Assets\Scripts\Manager\Controller_Level_Bounds_Manager.cs" />
-     <Compile Include="Assets\Scripts\Player\Controller_Player.cs" />
-     <Compile Include="Assets\Scripts\Player\Controller_Player_Camera.cs" />
-     <Compile Include="Assets\Scripts\Player\Controller_Player_Health_Bar.cs" />
-     <Compile Include="Assets\Scripts\Projectiles\ProjectileBase.cs" />
-     <Compile Include="Assets\Scripts\Projectiles\ProjectileStandard.cs" />
+     <Compile Include="Assets\Scripts - Logic\Enemy\Controller_Enemy.cs" />
+     <Compile Include="Assets\Scripts - Logic\Manager\Controller_Current_Score.cs" />
+     <Compile Include="Assets\Scripts - Logic\Manager\Controller_Difficulty_Manager.cs" />
+     <Compile Include="Assets\Scripts - Logic\Manager\Controller_Difficulty_Tracker.cs" />
+     <Compile Include="Assets\Scripts - Logic\Manager\Controller_Enemy_Manager.cs" />
+     <Compile Include="Assets\Scripts - Logic\Manager\Controller_Enemy_Spawn_Manager.cs" />
+     <Compile Include="Assets\Scripts - Logic\Manager\Controller_Level_Bounds_Manager.cs" />
+     <Compile Include="Assets\Scripts - Logic\Manager\Controller_Pause_Manager.cs" />
+     <Compile Include="Assets\Scripts - Logic\Manager\Controller_Pause_Overlay.cs" />
+     <Compile Include="Assets\Scripts - Logic\Manager\Controller_Score_Manager.cs" />
+     <Compile Include="Assets\Scripts - Logic\Player\Controller_After_Death_Score_Overlay.cs" />
+     <Compile Include="Assets\Scripts - Logic\Player\Controller_Failed_To_Pause.cs" />
+     <Compile Include="Assets\Scripts - Logic\Player\Controller_Player.cs" />
+     <Compile Include="Assets\Scripts - Logic\Player\Controller_Player_Camera.cs" />
+     <Compile Include="Assets\Scripts - Logic\Player\Controller_Player_Dead_Overlay.cs" />
+     <Compile Include="Assets\Scripts - Logic\Player\Controller_Player_Health_Bar.cs" />
+     <Compile Include="Assets\Scripts - Logic\Player\Controller_Restart_Button.cs" />
+     <Compile Include="Assets\Scripts - Logic\Projectiles\ProjectileAcceleration.cs" />
+     <Compile Include="Assets\Scripts - Logic\Projectiles\ProjectileBase.cs" />
+     <Compile Include="Assets\Scripts - Logic\Projectiles\ProjectileStandard.cs" />
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
  </Reference>
@@ -345,6 +356,8 @@
   <ItemGroup>
     <ProjectReference Include="Structs.csproj">
       <Project>{B81CA026-06D8-84A6-B6E2-65B052757752}</Project>      <Name>Structs</Name>    </ProjectReference>
+    <ProjectReference Include="DALInterfaces.csproj">
+      <Project>{9D045D0C-5F0B-D97A-EB43-9DB087A5605C}</Project>      <Name>DALInterfaces</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

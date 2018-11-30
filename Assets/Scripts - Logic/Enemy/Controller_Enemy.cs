@@ -11,11 +11,21 @@ public class Controller_Enemy : MonoBehaviour
     /*[Tooltip("A list of sample data used for testing purposes. TO BE DESTROYED ASAP!")]
     public List<ProjectileDataTemp> sampleList = new List<ProjectileDataTemp>();*/
 
-    [SerializeField, Tooltip("The delay between being spawned and firing its projectiles, in Seconds.")]
-    private float fireDelay = 1.0f;
+    [SerializeField, Tooltip("The starting delay between being spawned and firing its projectiles, in Seconds.")]
+    private float startFireDelay = 1.0f;
+    [SerializeField, Tooltip("The amount of time that the fire delay is reduced with when the difficulty increases, in Seconds.")]
+    private float fireDelayDifficultyModifier = 1.0f;
     [SerializeField, Tooltip("The list containing the projectile objects in descending projectile type order.")]
     private List<GameObject> projectileObjList = new List<GameObject>();
 
+    /// <summary>
+    /// A reference to the difficulty managers script component.
+    /// </summary>
+    private Controller_Difficulty_Manager difficultyManager;
+    /// <summary>
+    /// The current amount of time that must be waited after spawning to fire the projectiles, in Seconds.
+    /// </summary>
+    private float currentFireDelay = 0.0f;
     /// <summary>
     /// The time since the enemy was spawned, in Seconds.
     /// </summary>
@@ -31,6 +41,8 @@ public class Controller_Enemy : MonoBehaviour
 
     void Awake()
     {
+        difficultyManager = GameObject.FindGameObjectWithTag("Difficulty Manager").GetComponent<Controller_Difficulty_Manager>();
+        currentFireDelay = startFireDelay;
         localTransform = this.transform;
 
         /*foreach (ProjectileDataTemp tempData in sampleList)
@@ -43,8 +55,10 @@ public class Controller_Enemy : MonoBehaviour
 
     void Update()
     {
+        currentFireDelay = GetCurrentFireDelay(difficultyManager.HasDifficultyChanged, currentFireDelay, fireDelayDifficultyModifier);
+
         fireTimer += Time.deltaTime;
-        if (fireTimer >= fireDelay)
+        if (fireTimer >= currentFireDelay)
         {
             foreach (ProjectileData projData in projectileDataList)
             {
@@ -65,16 +79,49 @@ public class Controller_Enemy : MonoBehaviour
     }
 
     /// <summary>
+    ///  This function has been made internal for testing purposes but should be treated as a private function.
+    ///  Gets the current fire delay as in line with the given parameters.
+    /// </summary>
+    /// <param name="hasDifficultyChanged">Has the difficulty changed this frame?</param>
+    /// <param name="currentFireDelay">The current fire delay, in Seconds.</param>
+    /// <param name="fireDelayDifficultyModifier">The amount by which to lower the fire delay, in Seconds.</param>
+    /// <returns>The correct fire delay, in Seconds.</returns>
+    internal float GetCurrentFireDelay(bool hasDifficultyChanged, float currentFireDelay, float fireDelayDifficultyModifier)
+    {
+        if(hasDifficultyChanged)
+        {
+            return Mathf.Clamp(currentFireDelay - fireDelayDifficultyModifier, 0.0f, Mathf.Infinity);
+        }
+
+        return currentFireDelay;
+    }
+
+    /// <summary>
     /// This function has been made internal for testing purposes but should be treated as a private function.
     /// Instantiates a standard type projectile using the given parameters.
     /// </summary>
     /// <param name="projObj">A reference to the GameObject to be used as the projectile template.</param>
     /// <param name="movementDirection">The direction in which the projectile should move.</param>
     /// <param name="spawnPos">The position at which the projectile should be spawned in the level, in Units.</param>
-    internal void InstantiateStandardProjectile(GameObject projObj, Vector3 movementDirection, Vector3 spawnPos)
+    internal void InstantiateStandardProjectile(float movementSpeed, GameObject projObj, Vector3 movementDirection, Vector3 spawnPos)
     {
         ProjectileStandard projectile = Instantiate(projObj, spawnPos, Quaternion.identity).GetComponent<ProjectileStandard>();
-        projectile.SetValues(movementDirection);
+        projectile.SetValues(movementSpeed, movementDirection);
+    }
+
+    /// <summary>
+    /// This function has been made internal for testing purposes but should be treated as a private function.
+    /// Instantiates an acceleration type projectile using the given parameters.
+    /// </summary>
+    /// <param name="accelerationSpeed">The speed at which the projectile accelerates, in Units/Second^2.</param>
+    /// <param name="movementSpeed">The speed at which the projectile starts moving, in Units/Second.</param>
+    /// <param name="projObj">A reference to the GameObject to be used as the projectile template.</param>
+    /// <param name="movementDirection">The direction in which the projectile should move.</param>
+    /// <param name="spawnPos">The position at which the projectile should be spawned in the level, in Units.</param>
+    internal void InstantiateAccelerationProjectile(float accelerationSpeed, float movementSpeed, GameObject projObj, Vector3 movementDirection, Vector3 spawnPos)
+    {
+        ProjectileAcceleration projectile = Instantiate(projObj, spawnPos, Quaternion.identity).GetComponent<ProjectileAcceleration>();
+        projectile.SetValues(accelerationSpeed, movementSpeed, movementDirection);
     }
 
     /// <summary>
@@ -86,6 +133,8 @@ public class Controller_Enemy : MonoBehaviour
     {
         Vector2 relativeMovementDirection = new Vector2(projData.RelativeMovementDirectionX, projData.RelativeMovementDirectionY);
 
+        float movementSpeed = projData.ParameterList[0];
+
         Vector3 relativeSpawnPos = new Vector3(projData.RelativeSpawnX, projData.RelativeSpawnY);
         Vector3 actualSpawnPos = spawnerPosition + relativeSpawnPos;
 
@@ -94,7 +143,13 @@ public class Controller_Enemy : MonoBehaviour
 
         if (projectileType == 0)
         {
-            InstantiateStandardProjectile(projectileObj, relativeMovementDirection, actualSpawnPos);
+            InstantiateStandardProjectile(movementSpeed, projectileObj, relativeMovementDirection, actualSpawnPos);
+        }
+        else if(projectileType == 1)
+        {
+            float accelerationSpeed = projData.ParameterList[1];
+
+            InstantiateAccelerationProjectile(accelerationSpeed, movementSpeed, projectileObj, relativeMovementDirection, actualSpawnPos);
         }
         else
         {

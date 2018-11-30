@@ -1,0 +1,10 @@
+{
+    "name": "DALInterfaces",
+    "references": [
+        "Structs"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}

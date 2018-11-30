@@ -2,29 +2,31 @@
 
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 using Structs;
 
+[assembly: InternalsVisibleTo("EnemySpawnManagerTests")]
 public class Controller_Enemy_Spawn_Manager : MonoBehaviour 
 {
     [Header("Spawning")]
-    [Tooltip("A list of sample data used for testing purposes. TO BE DESTROYED ASAP!")]
-    public List<EnemyDataTemp> sampleList = new List<EnemyDataTemp>();
-    
     [SerializeField, Tooltip("The starting time in between spawning two enemies, in Seconds.")]
     private float startSpawnDelay = 1.0f;
     [SerializeField, Tooltip("A reference to the GameObject to be used as the enemy template.")]
     private GameObject enemyObj;
-    
+
+    /// <summary>
+    /// A reference to the enemy managers script component.
+    /// </summary>
+    private Controller_Enemy_Manager enemyManager;
+    /// <summary>
+    /// The amount of time the spawn manager has to wait between spawning two enemies, in Seconds.
+    /// </summary>
     private float currentSpawnDelay = 0.0f;
     /// <summary>
     /// The time since the last enemy was spawned, in Seconds.
     /// </summary>
     private float spawnTimer = 0.0f;
-    /// <summary>
-    /// A list containing the data required to spawn enemies.
-    /// </summary>
-    private List<EnemyData> enemyDataList = new List<EnemyData>();
     /// <summary>
     /// The collision mask that corresponds to the enemy collision layer.
     /// </summary>
@@ -39,13 +41,17 @@ public class Controller_Enemy_Spawn_Manager : MonoBehaviour
     private Vector2 enemyColliderSize;
 
     [Header("Difficulty")]
-    [SerializeField]
+    [SerializeField, Tooltip("The amount by which the delay between spawning two enemies decreases for each increase in difficulty, in Seconds.")]
     private float spawnDelayDifficultyAcceleration = 1.0f;
 
+    /// <summary>
+    /// A reference to the difficulty managers script component.
+    /// </summary>
     private Controller_Difficulty_Manager difficultyManager;
 
     void Awake()
     {
+        enemyManager = GameObject.FindGameObjectWithTag("Enemy Manager").GetComponent<Controller_Enemy_Manager>();
         currentSpawnDelay = startSpawnDelay;
         enemyColliderSize = enemyObj.GetComponent<BoxCollider2D>().size;
         enemyCollisionMask = (1 << 9);
@@ -54,33 +60,21 @@ public class Controller_Enemy_Spawn_Manager : MonoBehaviour
         UnityEngine.Random.InitState((int)DateTime.Now.Ticks);
 
         difficultyManager = GameObject.FindGameObjectWithTag("Difficulty Manager").GetComponent<Controller_Difficulty_Manager>();
-
-        // Used to convert temp structs to the actual structs. Needs to be removed ASAP.
-        foreach(EnemyDataTemp tempData in sampleList)
-        {
-            List<ProjectileData> projectileDataList = new List<ProjectileData>(tempData.ProjectileList.Count);
-            foreach(ProjectileDataTemp tempProjData in tempData.ProjectileList)
-            {
-                projectileDataList.Add(new ProjectileData(tempProjData.RelativeMovementDirectionX, tempProjData.RelativeMovementDirectionY, tempProjData.RelativeSpawnX, tempProjData.RelativeSpawnY, tempProjData.ProjectileType, tempProjData.ParameterList));
-            }
-
-            enemyDataList.Add(new EnemyData(tempData.Rotation, tempData.SpawnX, tempData.SpawnY, tempData.Difficulty, projectileDataList, tempData.Name));
-        }
     }
 
     void Start() { }
 	
 	void Update ()
     {
-        if (difficultyManager.ChangedThisFrame)
+        if (difficultyManager.HasDifficultyChanged)
         {
-            currentSpawnDelay = Mathf.Clamp(startSpawnDelay - difficultyManager.CurrentDifficulty * spawnDelayDifficultyAcceleration * Time.deltaTime, 0.0f, 1.0f);
+            currentSpawnDelay = Mathf.Clamp(startSpawnDelay - spawnDelayDifficultyAcceleration, 0.0f, Mathf.Infinity);
         }
 
         spawnTimer += Time.deltaTime;
         if (spawnTimer >= currentSpawnDelay)
         {
-            EnemyData randomEnemy = GetRandomEnemyData(enemyDataList);
+            EnemyData randomEnemy = GetRandomEnemyData(Mathf.Clamp(difficultyManager.CurrentDifficulty, 0, enemyManager.DifficultyLevelCount));
             if(SpawnEnemy(randomEnemy, enemyCollisionMask ^ playerCollisionMask, enemyColliderSize))
             {
                 spawnTimer = 0.0f;
@@ -113,14 +107,13 @@ public class Controller_Enemy_Spawn_Manager : MonoBehaviour
     }
 
     /// <summary>
-    /// This function has been made internal for testing purposes but should be treated as a private function.
-    /// Uses the UnityEngine.Random class to return a random entry from the given enemyDataList.
+    /// Returns a random enemy with a random difficulty, with the given parameter being the maximum.
     /// </summary>
-    /// <param name="enemyDataList">The list from which to retrieve a random entry.</param>
-    /// <returns>A random entry from the given list.</returns>
-    internal EnemyData GetRandomEnemyData(List<EnemyData> enemyDataList)
+    /// <param name="currentDifficulty">The current difficulty.</param>
+    /// <returns>A random EnemyData struct from the enemy manager.</returns>
+    internal EnemyData GetRandomEnemyData(int currentDifficulty)
     {
-        int randomEnemyIndex = UnityEngine.Random.Range(0, enemyDataList.Count);
-        return enemyDataList[randomEnemyIndex];
+        int randomDifficulty = UnityEngine.Random.Range(0, currentDifficulty);
+        return enemyManager.GetRandomEnemyData(randomDifficulty);
     }
 }

@@ -9,46 +9,45 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1365613159684036}
+  m_RootGameObject: {fileID: 1913301949455552}
   m_IsPrefabAsset: 1
---- !u!1 &1365613159684036
+--- !u!1 &1913301949455552
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4454112008499752}
-  - component: {fileID: 114493049653711516}
+  - component: {fileID: 4667238632427306}
+  - component: {fileID: 114002947714689214}
   m_Layer: 0
-  m_Name: Difficulty Manager
-  m_TagString: Difficulty Manager
+  m_Name: Enemy Manager
+  m_TagString: Enemy Manager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4454112008499752
+--- !u!4 &4667238632427306
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1365613159684036}
+  m_GameObject: {fileID: 1913301949455552}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114493049653711516
+--- !u!114 &114002947714689214
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1365613159684036}
+  m_GameObject: {fileID: 1913301949455552}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c4258ba2205ff74082eae1d3befe9d8, type: 3}
+  m_Script: {fileID: 11500000, guid: 4958cbfa150c6264495ac2adc953bcf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  difficultyIncreaseDelay: 10

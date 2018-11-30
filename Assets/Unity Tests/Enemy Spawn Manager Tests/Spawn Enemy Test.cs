@@ -1,0 +1,35 @@
+﻿using UnityEngine;
+using UnityEngine.TestTools;
+using NUnit.Framework;
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+using Structs;
+
+public class SpawnEnemyTest 
+{
+    public GameObject enemyObj;
+
+    [Test]
+    public void SpawnEnemyTestSingle()
+    {
+        GameObject enemySpawnManagerObj = new GameObject();
+        Controller_Enemy_Spawn_Manager enemySpawnManager = enemySpawnManagerObj.AddComponent<Controller_Enemy_Spawn_Manager>();
+
+        EnemyData enemyData = new EnemyData(0.0f, 0.0f, 0.0f, 0, new List<ProjectileData>(), "");
+
+        bool actualResult = false;
+        try
+        {
+            actualResult = enemySpawnManager.SpawnEnemy(enemyData, 0, new Vector2(0.16f, 0.16f));
+        }
+        catch(Exception exc)
+        {
+            Debug.Log(exc);
+        }
+
+        Assert.AreEqual(true, actualResult);
+    }
+}

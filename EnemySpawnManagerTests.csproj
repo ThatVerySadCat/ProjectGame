@@ -9,10 +9,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{FDB9898E-C5D1-DC98-38C3-45B2862DB8AD}</ProjectGuid>
+    <ProjectGuid>{0DAB1441-B3D4-E87F-D039-DF2726B9932D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>UnityTests</AssemblyName>
+    <AssemblyName>EnemySpawnManagerTests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -53,10 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Unity Tests\Player Tests\Accelerate Axis Test.cs" />
-     <Compile Include="Assets\Unity Tests\Player Tests\Decelerate Axis Test.cs" />
-     <Compile Include="Assets\Unity Tests\Player Tests\Get Acceleration Direction Test.cs" />
-     <Compile Include="Assets\Unity Tests\Player Tests\Get Deceleration Direction Test.cs" />
+     <Compile Include="Assets\Unity Tests\Enemy Spawn Manager Tests\Spawn Enemy Test.cs" />
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
  </Reference>

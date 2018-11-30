@@ -1,0 +1,11 @@
+{
+    "name": "Logic",
+    "references": [
+        "Structs",
+        "DALInterfaces"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}
