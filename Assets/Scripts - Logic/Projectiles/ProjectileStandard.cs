@@ -8,18 +8,18 @@ public class ProjectileStandard : ProjectileBase
     void Awake()
     {
         localTransform = this.transform;
-
-        if (difficultyManager == null)
-        {
-            difficultyManager = GameObject.FindGameObjectWithTag("Difficulty Manager").GetComponent<Controller_Difficulty_Manager>();
-        }
     }
 
     protected override void StartWrapper()
     {
         currentSpeed = baseSpeed;
         currentMovementDirection = baseMovementDirection;
-        levelBounds = GameObject.FindGameObjectWithTag("Level Bounds Manager").GetComponent<Controller_Level_Bounds_Manager>().LevelBounds;
+
+        GameObject levelBoundsManagerObj = GameObject.FindGameObjectWithTag("Level Bounds Manager");
+        if (levelBoundsManagerObj != null)
+        {
+            levelBounds = levelBoundsManagerObj.GetComponent<Controller_Level_Bounds_Manager>().LevelBounds;
+        }
     }
     void Start()
     {

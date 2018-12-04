@@ -49,6 +49,23 @@ public class Controller_Enemy_Spawn_Manager : MonoBehaviour
     /// </summary>
     private Controller_Difficulty_Manager difficultyManager;
 
+    [Header("Force Spawning")]
+    [SerializeField, Tooltip("Automatically spawn enemy?")]
+    private bool autoSpawnEnemies = true;
+
+    /// <summary>
+    /// Try to force spawn enemies?
+    /// </summary>
+    private bool forceSpawnActive = false;
+    /// <summary>
+    /// The struct containing the information necesary to force spawn enemies.
+    /// </summary>
+    private EnemyData enemyToForceSpawn;
+    /// <summary>
+    /// A reference to the last force spawned enemy GameObject.
+    /// </summary>
+    private GameObject forceSpawnedEnemy;
+
     void Awake()
     {
         enemyManager = GameObject.FindGameObjectWithTag("Enemy Manager").GetComponent<Controller_Enemy_Manager>();
@@ -59,38 +76,71 @@ public class Controller_Enemy_Spawn_Manager : MonoBehaviour
 
         UnityEngine.Random.InitState((int)DateTime.Now.Ticks);
 
-        difficultyManager = GameObject.FindGameObjectWithTag("Difficulty Manager").GetComponent<Controller_Difficulty_Manager>();
+        GameObject difficultyManagerObj = GameObject.FindGameObjectWithTag("Difficulty Manager");
+        if (difficultyManagerObj != null)
+        {
+            difficultyManager = difficultyManagerObj.GetComponent<Controller_Difficulty_Manager>();
+        }
     }
 
     void Start() { }
 	
 	void Update ()
     {
-        if (difficultyManager.HasDifficultyChanged)
+        if (difficultyManager != null && difficultyManager.HasDifficultyChanged)
         {
             currentSpawnDelay = Mathf.Clamp(startSpawnDelay - spawnDelayDifficultyAcceleration, 0.0f, Mathf.Infinity);
         }
 
-        spawnTimer += Time.deltaTime;
-        if (spawnTimer >= currentSpawnDelay)
+        if (autoSpawnEnemies)
         {
-            EnemyData randomEnemy = GetRandomEnemyData(Mathf.Clamp(difficultyManager.CurrentDifficulty, 0, enemyManager.DifficultyLevelCount));
-            if(SpawnEnemy(randomEnemy, enemyCollisionMask ^ playerCollisionMask, enemyColliderSize))
+            spawnTimer += Time.deltaTime;
+            if (spawnTimer >= currentSpawnDelay)
             {
-                spawnTimer = 0.0f;
+                EnemyData randomEnemy = GetRandomEnemyData(Mathf.Clamp(difficultyManager.CurrentDifficulty, 0, enemyManager.DifficultyLevelCount));
+                if (SpawnEnemy(randomEnemy, enemyCollisionMask ^ playerCollisionMask, enemyColliderSize) != null)
+                {
+                    spawnTimer = 0.0f;
+                }
+            }
+        }
+        else
+        {
+            if (forceSpawnedEnemy == null && forceSpawnActive)
+            {
+                forceSpawnedEnemy = SpawnEnemy(enemyToForceSpawn, enemyCollisionMask, enemyColliderSize);
             }
         }
     }
 
     /// <summary>
+    /// Forces an enemy with the given enemyID to be spawned. Also destroys any other enemy already spawned.
+    /// </summary>
+    /// <param name="enemyID">The ID of the enemy to spawn.</param>
+    public void ForceSpawnEnemy(int enemyID)
+    {
+        if (forceSpawnedEnemy != null)
+        {
+            Destroy(forceSpawnedEnemy);
+        }
+
+        EnemyData enemyData = enemyManager.GetEnemyByID(enemyID);
+        if ((forceSpawnedEnemy = SpawnEnemy(enemyData, enemyCollisionMask, enemyColliderSize)) != null)
+        {
+            forceSpawnActive = true;
+            enemyToForceSpawn = enemyData;
+        }
+    }
+
+    /// <summary>
     /// This function has been made internal for testing purposes but should be treated as a private function.
-    /// Spawns an enemy using the given parameters. Returns true if an enemy was created, returns false otherwise.
+    /// Spawns an enemy using the given parameters and returns it.
     /// </summary>
     /// <param name="enemyData">The struct containing the data needed to spawn an enemy.</param>
     /// <param name="collisionMask">The collision mask used to check with which object(s) the enemy can't spawn on.</param>
     /// <param name="colliderSize">The size of the enemy collider to check for possible collisions, in Units.</param>
-    /// <returns>True if the enemy was spawned succesfully, false otherwise.</returns>
-    internal bool SpawnEnemy(EnemyData enemyData, int collisionMask, Vector2 colliderSize)
+    /// <returns>Returns the GameObject that is the enemy or null.</returns>
+    internal GameObject SpawnEnemy(EnemyData enemyData, int collisionMask, Vector2 colliderSize)
     {
         Vector3 spawnPos = new Vector3(enemyData.SpawnX, enemyData.SpawnY);
         if (!Physics2D.BoxCast(spawnPos, colliderSize, 0.0f, Vector2.zero, Mathf.Infinity, collisionMask))
@@ -100,10 +150,10 @@ public class Controller_Enemy_Spawn_Manager : MonoBehaviour
             Controller_Enemy enemy = Instantiate(enemyObj, spawnPos, spawnRotation).GetComponent<Controller_Enemy>();
             enemy.SetValues(enemyData.ProjectileList);
 
-            return true;
+            return enemy.gameObject;
         }
 
-        return false;
+        return null;
     }
 
     /// <summary>

@@ -14,6 +14,7 @@ namespace Structs
         public float SpawnX;
         public float SpawnY;
         public int Difficulty;
+        public int ID;
         public List<ProjectileDataTemp> ProjectileList;
         public string Name;
     }
@@ -53,13 +54,26 @@ namespace Structs
             private set;
         }
         /// <summary>
-        /// A ReadOnlyCollection used to store the list of projectile data.
+        /// The unique ID belonging to the enemy.
+        /// </summary>
+        public int ID
+        {
+            get;
+            private set;
+        }
+        /// <summary>
+        /// A ReadOnlyCollection used to store the list of projectile data, or null if there is no list.
         /// </summary>
         public ReadOnlyCollection<ProjectileData> ProjectileList
         {
             get
             {
-                return projectileList.AsReadOnly();
+                if (projectileList != null)
+                {
+                    return projectileList.AsReadOnly();
+                }
+
+                return null;
             }
         }
         /// <summary>
@@ -76,12 +90,13 @@ namespace Structs
         /// </summary>
         private List<ProjectileData> projectileList;
 
-        public EnemyData(float _rotation, float _spawnX, float _spawnY, int _difficulty, List<ProjectileData> _projectileList, string _name)
+        public EnemyData(float _rotation, float _spawnX, float _spawnY, int _difficulty, int _id, List<ProjectileData> _projectileList, string _name)
         {
             Rotation = _rotation;
             SpawnX = _spawnX;
             SpawnY = _spawnY;
             Difficulty = _difficulty;
+            ID = _id;
             projectileList = _projectileList;
             Name = _name;
         }

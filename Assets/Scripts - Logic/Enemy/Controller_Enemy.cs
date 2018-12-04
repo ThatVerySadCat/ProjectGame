@@ -41,21 +41,24 @@ public class Controller_Enemy : MonoBehaviour
 
     void Awake()
     {
-        difficultyManager = GameObject.FindGameObjectWithTag("Difficulty Manager").GetComponent<Controller_Difficulty_Manager>();
+        GameObject difficultyManagerObj = GameObject.FindGameObjectWithTag("Difficulty Manager");
+        if (difficultyManagerObj != null)
+        {
+            difficultyManager = difficultyManagerObj.GetComponent<Controller_Difficulty_Manager>();
+        }
+
         currentFireDelay = startFireDelay;
         localTransform = this.transform;
-
-        /*foreach (ProjectileDataTemp tempData in sampleList)
-        {
-            projectileDataList.Add(new ProjectileData(tempData.RelativeMovementDirectionX, tempData.RelativeMovementDirectionY, tempData.RelativeSpawnX, tempData.RelativeSpawnY, tempData.ProjectileType, tempData.ParameterList));
-        }*/
     }
 
     void Start() { }
 
     void Update()
     {
-        currentFireDelay = GetCurrentFireDelay(difficultyManager.HasDifficultyChanged, currentFireDelay, fireDelayDifficultyModifier);
+        if (difficultyManager != null)
+        {
+            currentFireDelay = GetCurrentFireDelay(difficultyManager.HasDifficultyChanged, currentFireDelay, fireDelayDifficultyModifier);
+        }
 
         fireTimer += Time.deltaTime;
         if (fireTimer >= currentFireDelay)

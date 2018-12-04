@@ -34,11 +34,6 @@ public abstract class ProjectileBase : MonoBehaviour
     protected Vector2 currentMovementDirection;
 
     /// <summary>
-    /// A reference to the difficulty managers script component.
-    /// </summary>
-    protected static Controller_Difficulty_Manager difficultyManager;
-
-    /// <summary>
     /// Is the given position outside of the given level bounds?
     /// </summary>
     /// <param name="levelBounds">The bounds of the level, in Units.</param>

@@ -23,8 +23,10 @@ public class Controller_After_Death_Score_Overlay : MonoBehaviour
 
 	void Start () {	}
 	
-	void Update ()
+    void OnEnable()
     {
         scoreText.text = scoreManager.CurrentScore.ToString();
     }
+
+    void Update() { }
 }

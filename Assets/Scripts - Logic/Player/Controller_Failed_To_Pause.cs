@@ -56,7 +56,7 @@ public class Controller_Failed_To_Pause : MonoBehaviour
     internal Color GetFadeOutColor(Color oldColor, float fadeOutSpeed)
     {
         Color returnColor = new Color(oldColor.r, oldColor.g, oldColor.b, oldColor.a);
-        returnColor.a -= Mathf.Clamp01(returnColor.a - fadeOutSpeed * Time.deltaTime);
+        returnColor.a = Mathf.Clamp01(returnColor.a - fadeOutSpeed * Time.unscaledDeltaTime);
         return returnColor;
     }
 

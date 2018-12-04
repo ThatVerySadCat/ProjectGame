@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/Scene_001_Level.unity
     guid: 4eec34f6d58b1e5478d165a7ac2ac6e3
+  - enabled: 1
+    path: Assets/_Scenes/Scene_002_View_Enemy.unity
+    guid: 98bdccdd9d87f7a41adbce1aca451a53
   m_configObjects: {}

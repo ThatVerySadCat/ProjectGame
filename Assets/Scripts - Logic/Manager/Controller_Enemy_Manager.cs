@@ -45,7 +45,27 @@ public class Controller_Enemy_Manager : MonoBehaviour
 	void Start () {	}
 	
 	void Update () { }
-    
+
+    /// <summary>
+    /// Returns the EnemyData belonging to the enemy with the given enemyID. Returns an EnemyData with ID -1 if the correct can't be found.
+    /// </summary>
+    /// <param name="enemyID">The ID of the enemy to find.</param>
+    /// <returns>An EnemyData struct containing the necesary spawn information. Returns an EnemyData struct with ID -1 if the correct one can't be foun.</returns>
+    public EnemyData GetEnemyByID(int enemyID)
+    {
+        EnemyData returnData = new EnemyData(0.0f, 0.0f, 0.0f, 0, -1, new List<ProjectileData>(), "");
+        foreach (List<EnemyData> enemyDataSubList in enemyDataList)
+        {
+            returnData = enemyDataSubList.Find(x => x.ID == enemyID);
+            if (returnData.ID == enemyID)
+            {
+                break;
+            }
+        }
+
+        return returnData;
+    }
+
     /// <summary>
     /// Returns a random EnemyData struct with the given difficulty level.
     /// </summary>
@@ -77,7 +97,7 @@ public class Controller_Enemy_Manager : MonoBehaviour
                 enemyDataList.Add(new List<EnemyData>());
             }
 
-            enemyDataList[difficulty].Add(new EnemyData(tempData.Rotation, tempData.SpawnX, tempData.SpawnY, tempData.Difficulty, projectileDataList, tempData.Name));
+            enemyDataList[difficulty].Add(new EnemyData(tempData.Rotation, tempData.SpawnX, tempData.SpawnY, tempData.Difficulty, tempData.ID, projectileDataList, tempData.Name));
         }
     }
 
