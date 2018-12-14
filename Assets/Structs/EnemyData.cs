@@ -68,7 +68,7 @@ namespace Structs
         {
             get
             {
-                if (projectileList != null)
+                if (projectileList != null && projectileList.Count > 0)
                 {
                     return projectileList.AsReadOnly();
                 }

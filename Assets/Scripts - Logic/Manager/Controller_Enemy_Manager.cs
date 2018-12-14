@@ -53,17 +53,16 @@ public class Controller_Enemy_Manager : MonoBehaviour
     /// <returns>An EnemyData struct containing the necesary spawn information. Returns an EnemyData struct with ID -1 if the correct one can't be foun.</returns>
     public EnemyData GetEnemyByID(int enemyID)
     {
-        EnemyData returnData = new EnemyData(0.0f, 0.0f, 0.0f, 0, -1, new List<ProjectileData>(), "");
         foreach (List<EnemyData> enemyDataSubList in enemyDataList)
         {
-            returnData = enemyDataSubList.Find(x => x.ID == enemyID);
-            if (returnData.ID == enemyID)
+            EnemyData tempData = enemyDataSubList.Find(x => x.ID == enemyID);
+            if (tempData.ID == enemyID)
             {
-                break;
+                return tempData;
             }
         }
 
-        return returnData;
+        return new EnemyData(0.0f, 0.0f, 0.0f, 0, -1, new List<ProjectileData>(), "");
     }
 
     /// <summary>

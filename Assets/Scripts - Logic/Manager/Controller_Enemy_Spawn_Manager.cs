@@ -125,7 +125,7 @@ public class Controller_Enemy_Spawn_Manager : MonoBehaviour
         }
 
         EnemyData enemyData = enemyManager.GetEnemyByID(enemyID);
-        if ((forceSpawnedEnemy = SpawnEnemy(enemyData, enemyCollisionMask, enemyColliderSize)) != null)
+        if (enemyData.ID == enemyID && (forceSpawnedEnemy = SpawnEnemy(enemyData, enemyCollisionMask, enemyColliderSize)) != null)
         {
             forceSpawnActive = true;
             enemyToForceSpawn = enemyData;
@@ -147,10 +147,14 @@ public class Controller_Enemy_Spawn_Manager : MonoBehaviour
         {
             Quaternion spawnRotation = Quaternion.Euler(0.0f, 0.0f, enemyData.Rotation);
 
-            Controller_Enemy enemy = Instantiate(enemyObj, spawnPos, spawnRotation).GetComponent<Controller_Enemy>();
-            enemy.SetValues(enemyData.ProjectileList);
+            GameObject enemyObjTemp = Instantiate(enemyObj, spawnPos, spawnRotation);
+            if (enemyObjTemp != null)
+            {
+                Controller_Enemy enemy = enemyObjTemp.GetComponent<Controller_Enemy>();
+                enemy.SetValues(enemyData.ProjectileList);
+            }
 
-            return enemy.gameObject;
+            return enemyObjTemp;
         }
 
         return null;

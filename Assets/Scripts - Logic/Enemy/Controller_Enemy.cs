@@ -78,7 +78,10 @@ public class Controller_Enemy : MonoBehaviour
     /// <param name="_projectileDataList">The list filled with projectile data for the enemy to use.</param>
     public void SetValues(ReadOnlyCollection<ProjectileData> _projectileDataList)
     {
-        projectileDataList = new List<ProjectileData>(_projectileDataList);
+        if (_projectileDataList != null && _projectileDataList.Count > 0)
+        {
+            projectileDataList = new List<ProjectileData>(_projectileDataList);
+        }
     }
 
     /// <summary>

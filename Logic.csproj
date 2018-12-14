@@ -64,6 +64,7 @@
      <Compile Include="Assets\Scripts - Logic\Manager\Controller_Pause_Overlay.cs" />
      <Compile Include="Assets\Scripts - Logic\Manager\Controller_Scene_Switch_Manager.cs" />
      <Compile Include="Assets\Scripts - Logic\Manager\Controller_Score_Manager.cs" />
+     <Compile Include="Assets\Scripts - Logic\Manager\Controller_WebGL_Input_Manager.cs" />
      <Compile Include="Assets\Scripts - Logic\Player\Controller_After_Death_Score_Overlay.cs" />
      <Compile Include="Assets\Scripts - Logic\Player\Controller_Failed_To_Pause.cs" />
      <Compile Include="Assets\Scripts - Logic\Player\Controller_Player.cs" />
