@@ -1,5 +1,5 @@
 {
-    "name": "PlayerTests",
+    "name": "_PlayerTests",
     "references": [
         "Logic"
     ],

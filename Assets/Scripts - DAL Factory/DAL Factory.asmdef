@@ -1,9 +1,8 @@
 {
-    "name": "Logic",
+    "name": "DALFactory",
     "references": [
-        "Structs",
-        "DALInterfaces",
-        "DALFactory"
+        "DAL",
+        "DALInterfaces"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],

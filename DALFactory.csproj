@@ -9,10 +9,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{754C804E-9154-2FE1-CB25-6A9DBC1D8F25}</ProjectGuid>
+    <ProjectGuid>{CFE9C6D9-3C48-07DF-2CE0-3DECE0C4552A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Logic</AssemblyName>
+    <AssemblyName>DALFactory</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -53,28 +53,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts - Logic\Enemy\Controller_Enemy.cs" />
-     <Compile Include="Assets\Scripts - Logic\Manager\Controller_Current_Score.cs" />
-     <Compile Include="Assets\Scripts - Logic\Manager\Controller_Difficulty_Manager.cs" />
-     <Compile Include="Assets\Scripts - Logic\Manager\Controller_Difficulty_Tracker.cs" />
-     <Compile Include="Assets\Scripts - Logic\Manager\Controller_Enemy_Manager.cs" />
-     <Compile Include="Assets\Scripts - Logic\Manager\Controller_Enemy_Spawn_Manager.cs" />
-     <Compile Include="Assets\Scripts - Logic\Manager\Controller_Level_Bounds_Manager.cs" />
-     <Compile Include="Assets\Scripts - Logic\Manager\Controller_Pause_Manager.cs" />
-     <Compile Include="Assets\Scripts - Logic\Manager\Controller_Pause_Overlay.cs" />
-     <Compile Include="Assets\Scripts - Logic\Manager\Controller_Scene_Switch_Manager.cs" />
-     <Compile Include="Assets\Scripts - Logic\Manager\Controller_Score_Manager.cs" />
-     <Compile Include="Assets\Scripts - Logic\Manager\Controller_WebGL_Input_Manager.cs" />
-     <Compile Include="Assets\Scripts - Logic\Player\Controller_After_Death_Score_Overlay.cs" />
-     <Compile Include="Assets\Scripts - Logic\Player\Controller_Failed_To_Pause.cs" />
-     <Compile Include="Assets\Scripts - Logic\Player\Controller_Player.cs" />
-     <Compile Include="Assets\Scripts - Logic\Player\Controller_Player_Camera.cs" />
-     <Compile Include="Assets\Scripts - Logic\Player\Controller_Player_Dead_Overlay.cs" />
-     <Compile Include="Assets\Scripts - Logic\Player\Controller_Player_Health_Bar.cs" />
-     <Compile Include="Assets\Scripts - Logic\Player\Controller_Restart_Button.cs" />
-     <Compile Include="Assets\Scripts - Logic\Projectiles\ProjectileAcceleration.cs" />
-     <Compile Include="Assets\Scripts - Logic\Projectiles\ProjectileBase.cs" />
-     <Compile Include="Assets\Scripts - Logic\Projectiles\ProjectileStandard.cs" />
+     <Compile Include="Assets\Scripts - DAL Factory\EnemyDALFactory.cs" />
+     <Compile Include="Assets\Scripts - DAL Factory\ScoreDALFactory.cs" />
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
  </Reference>
@@ -356,12 +336,10 @@
  </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Structs.csproj">
-      <Project>{B81CA026-06D8-84A6-B6E2-65B052757752}</Project>      <Name>Structs</Name>    </ProjectReference>
+    <ProjectReference Include="DAL.csproj">
+      <Project>{B76AE0BC-E4AD-6695-0961-EFD69152CF48}</Project>      <Name>DAL</Name>    </ProjectReference>
     <ProjectReference Include="DALInterfaces.csproj">
       <Project>{9D045D0C-5F0B-D97A-EB43-9DB087A5605C}</Project>      <Name>DALInterfaces</Name>    </ProjectReference>
-    <ProjectReference Include="DALFactory.csproj">
-      <Project>{CFE9C6D9-3C48-07DF-2CE0-3DECE0C4552A}</Project>      <Name>DALFactory</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

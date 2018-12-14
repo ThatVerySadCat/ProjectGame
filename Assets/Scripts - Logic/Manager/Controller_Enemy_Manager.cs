@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 using Structs;
 
-[assembly: InternalsVisibleTo("EnemyManagerTests")]
+[assembly: InternalsVisibleTo("_EnemyManagerTests")]
 public class Controller_Enemy_Manager : MonoBehaviour 
 {
     /// <summary>

@@ -9,10 +9,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{754C804E-9154-2FE1-CB25-6A9DBC1D8F25}</ProjectGuid>
+    <ProjectGuid>{CFAD102F-635D-F85B-5EAA-0D54FA3FEA47}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Logic</AssemblyName>
+    <AssemblyName>_PlayerTests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -53,28 +53,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts - Logic\Enemy\Controller_Enemy.cs" />
-     <Compile Include="Assets\Scripts - Logic\Manager\Controller_Current_Score.cs" />
-     <Compile Include="Assets\Scripts - Logic\Manager\Controller_Difficulty_Manager.cs" />
-     <Compile Include="Assets\Scripts - Logic\Manager\Controller_Difficulty_Tracker.cs" />
-     <Compile Include="Assets\Scripts - Logic\Manager\Controller_Enemy_Manager.cs" />
-     <Compile Include="Assets\Scripts - Logic\Manager\Controller_Enemy_Spawn_Manager.cs" />
-     <Compile Include="Assets\Scripts - Logic\Manager\Controller_Level_Bounds_Manager.cs" />
-     <Compile Include="Assets\Scripts - Logic\Manager\Controller_Pause_Manager.cs" />
-     <Compile Include="Assets\Scripts - Logic\Manager\Controller_Pause_Overlay.cs" />
-     <Compile Include="Assets\Scripts - Logic\Manager\Controller_Scene_Switch_Manager.cs" />
-     <Compile Include="Assets\Scripts - Logic\Manager\Controller_Score_Manager.cs" />
-     <Compile Include="Assets\Scripts - Logic\Manager\Controller_WebGL_Input_Manager.cs" />
-     <Compile Include="Assets\Scripts - Logic\Player\Controller_After_Death_Score_Overlay.cs" />
-     <Compile Include="Assets\Scripts - Logic\Player\Controller_Failed_To_Pause.cs" />
-     <Compile Include="Assets\Scripts - Logic\Player\Controller_Player.cs" />
-     <Compile Include="Assets\Scripts - Logic\Player\Controller_Player_Camera.cs" />
-     <Compile Include="Assets\Scripts - Logic\Player\Controller_Player_Dead_Overlay.cs" />
-     <Compile Include="Assets\Scripts - Logic\Player\Controller_Player_Health_Bar.cs" />
-     <Compile Include="Assets\Scripts - Logic\Player\Controller_Restart_Button.cs" />
-     <Compile Include="Assets\Scripts - Logic\Projectiles\ProjectileAcceleration.cs" />
-     <Compile Include="Assets\Scripts - Logic\Projectiles\ProjectileBase.cs" />
-     <Compile Include="Assets\Scripts - Logic\Projectiles\ProjectileStandard.cs" />
+     <Compile Include="Assets\Unity Tests\Player Tests\Accelerate Axis Test.cs" />
+     <Compile Include="Assets\Unity Tests\Player Tests\Decelerate Axis Test.cs" />
+     <Compile Include="Assets\Unity Tests\Player Tests\Get Acceleration Direction Test.cs" />
+     <Compile Include="Assets\Unity Tests\Player Tests\Get Deceleration Direction Test.cs" />
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
  </Reference>
@@ -101,6 +83,12 @@
  </Reference>
  <Reference Include="UnityEngine.CloudWebServicesModule">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.CloudWebServicesModule.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.ClusterInputModule">
+ <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.ClusterInputModule.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.ClusterRendererModule">
+ <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.ClusterRendererModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.CoreModule">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.CoreModule.dll</HintPath>
@@ -261,6 +249,15 @@
  <Reference Include="UnityEditor.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/Editor/UnityEditor.UI.dll</HintPath>
  </Reference>
+ <Reference Include="UnityEditor.TestRunner">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/Editor/UnityEditor.TestRunner.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.TestRunner">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
+ </Reference>
+ <Reference Include="nunit.framework">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.Timeline">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll</HintPath>
  </Reference>
@@ -328,40 +325,36 @@
  <HintPath>C:/Users/Martijn van den Berk/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="mscorlib">
- <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/unity/mscorlib.dll</HintPath>
+ <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/2.0-api/mscorlib.dll</HintPath>
  </Reference>
  <Reference Include="System">
- <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/unity/System.dll</HintPath>
+ <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/2.0-api/System.dll</HintPath>
  </Reference>
  <Reference Include="System.Core">
- <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/unity/System.Core.dll</HintPath>
+ <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/2.0-api/System.Core.dll</HintPath>
  </Reference>
  <Reference Include="System.Runtime.Serialization">
- <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/unity/System.Runtime.Serialization.dll</HintPath>
+ <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/2.0-api/System.Runtime.Serialization.dll</HintPath>
  </Reference>
  <Reference Include="System.Xml">
- <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/unity/System.Xml.dll</HintPath>
+ <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/2.0-api/System.Xml.dll</HintPath>
  </Reference>
  <Reference Include="System.Xml.Linq">
- <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/unity/System.Xml.Linq.dll</HintPath>
+ <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/2.0-api/System.Xml.Linq.dll</HintPath>
  </Reference>
  <Reference Include="UnityScript">
- <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/unity/UnityScript.dll</HintPath>
+ <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/2.0-api/UnityScript.dll</HintPath>
  </Reference>
  <Reference Include="UnityScript.Lang">
- <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/unity/UnityScript.Lang.dll</HintPath>
+ <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/2.0-api/UnityScript.Lang.dll</HintPath>
  </Reference>
  <Reference Include="Boo.Lang">
- <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/unity/Boo.Lang.dll</HintPath>
+ <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/2.0-api/Boo.Lang.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Structs.csproj">
-      <Project>{B81CA026-06D8-84A6-B6E2-65B052757752}</Project>      <Name>Structs</Name>    </ProjectReference>
-    <ProjectReference Include="DALInterfaces.csproj">
-      <Project>{9D045D0C-5F0B-D97A-EB43-9DB087A5605C}</Project>      <Name>DALInterfaces</Name>    </ProjectReference>
-    <ProjectReference Include="DALFactory.csproj">
-      <Project>{CFE9C6D9-3C48-07DF-2CE0-3DECE0C4552A}</Project>      <Name>DALFactory</Name>    </ProjectReference>
+    <ProjectReference Include="Logic.csproj">
+      <Project>{754C804E-9154-2FE1-CB25-6A9DBC1D8F25}</Project>      <Name>Logic</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

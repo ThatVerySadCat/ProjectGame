@@ -1,5 +1,5 @@
 {
-    "name": "EnemyManagerTests",
+    "name": "_EnemyManagerTests",
     "references": [
         "Logic",
         "Structs"

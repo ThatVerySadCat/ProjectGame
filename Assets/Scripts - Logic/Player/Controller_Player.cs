@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("PlayerTests")] // This class's internals have been made visible to UnityTests to allow its functions to be unit tested.
+[assembly: InternalsVisibleTo("_PlayerTests")] // This class's internals have been made visible to UnityTests to allow its functions to be unit tested.
 public class Controller_Player : MonoBehaviour
 {
     /// <summary>

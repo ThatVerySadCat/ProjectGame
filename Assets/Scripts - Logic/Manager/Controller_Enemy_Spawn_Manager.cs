@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 
 using Structs;
 
-[assembly: InternalsVisibleTo("EnemySpawnManagerTests")]
+[assembly: InternalsVisibleTo("_EnemySpawnManagerTests")]
 public class Controller_Enemy_Spawn_Manager : MonoBehaviour 
 {
     [Header("Spawning")]
