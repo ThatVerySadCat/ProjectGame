@@ -27,7 +27,7 @@ public class GetRandomEnemyTest
             sampleList.Add(enemyData);
         }
 
-        enemyManager.sampleList = sampleList;
+        enemyManager.samples = sampleList;
         enemyManager.AssembleEnemyDataList();
 
         int randomDifficulty = UnityEngine.Random.Range(0, maxDifficulty);

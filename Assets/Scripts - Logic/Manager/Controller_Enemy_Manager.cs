@@ -16,17 +16,17 @@ public class Controller_Enemy_Manager : MonoBehaviour
     {
         get
         {
-            return enemyDataList.Count;
+            return enemyDatas.Count;
         }
     }
 
     [Tooltip("A list filled with data to be used in editor for testing purposes.")]
-    public List<EnemyDataTemp> sampleList = new List<EnemyDataTemp>();
+    public List<EnemyDataTemp> samples = new List<EnemyDataTemp>();
 
     /// <summary>
     /// A list containing more lists, ordered based on difficulty level, with them containing the enemy data.
     /// </summary>
-    private List<List<EnemyData>> enemyDataList = new List<List<EnemyData>>();
+    private List<List<EnemyData>> enemyDatas = new List<List<EnemyData>>();
     /// <summary>
     /// The Enemy DAL interface to use for database communication.
     /// </summary>
@@ -36,7 +36,7 @@ public class Controller_Enemy_Manager : MonoBehaviour
     {
         DontDestroyOnLoad(this.gameObject);
 
-        sampleList.Sort(SortByAscendingDifficulty);
+        samples.Sort(SortByAscendingDifficulty);
 
         // Used to convert temp structs to the actual structs. Needs to be removed ASAP.
         AssembleEnemyDataList();
@@ -53,7 +53,7 @@ public class Controller_Enemy_Manager : MonoBehaviour
     /// <returns>An EnemyData struct containing the necesary spawn information. Returns an EnemyData struct with ID -1 if the correct one can't be foun.</returns>
     public EnemyData GetEnemyByID(int enemyID)
     {
-        foreach (List<EnemyData> enemyDataSubList in enemyDataList)
+        foreach (List<EnemyData> enemyDataSubList in enemyDatas)
         {
             EnemyData tempData = enemyDataSubList.Find(x => x.ID == enemyID);
             if (tempData.ID == enemyID)
@@ -72,8 +72,8 @@ public class Controller_Enemy_Manager : MonoBehaviour
     /// <returns>A random EnemyData struct with the given difficulty level.</returns>
     public EnemyData GetRandomEnemyData(int difficulty)
     {
-        int randomIndex = UnityEngine.Random.Range(0, enemyDataList[difficulty].Count);
-        return enemyDataList[difficulty][randomIndex];
+        int randomIndex = UnityEngine.Random.Range(0, enemyDatas[difficulty].Count);
+        return enemyDatas[difficulty][randomIndex];
     }
 
     /// <summary>
@@ -81,7 +81,7 @@ public class Controller_Enemy_Manager : MonoBehaviour
     /// </summary>
     internal void AssembleEnemyDataList()
     {
-        foreach (EnemyDataTemp tempData in sampleList)
+        foreach (EnemyDataTemp tempData in samples)
         {
             List<ProjectileData> projectileDataList = new List<ProjectileData>(tempData.ProjectileList.Count);
             foreach (ProjectileDataTemp tempProjData in tempData.ProjectileList)
@@ -91,12 +91,12 @@ public class Controller_Enemy_Manager : MonoBehaviour
 
             int difficulty = tempData.Difficulty;
 
-            if (enemyDataList.Count - 1 < difficulty)
+            if (enemyDatas.Count - 1 < difficulty)
             {
-                enemyDataList.Add(new List<EnemyData>());
+                enemyDatas.Add(new List<EnemyData>());
             }
 
-            enemyDataList[difficulty].Add(new EnemyData(tempData.Rotation, tempData.SpawnX, tempData.SpawnY, tempData.Difficulty, tempData.ID, projectileDataList, tempData.Name));
+            enemyDatas[difficulty].Add(new EnemyData(tempData.Rotation, tempData.SpawnX, tempData.SpawnY, tempData.Difficulty, tempData.ID, projectileDataList, tempData.Name));
         }
     }
 

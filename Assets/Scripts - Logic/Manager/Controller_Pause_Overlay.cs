@@ -16,16 +16,16 @@ public class Controller_Pause_Overlay : MonoBehaviour
     /// <summary>
     /// References to the GameObjects that are the children of this object.
     /// </summary>
-    private GameObject[] childObjectArray;
+    private GameObject[] childObjects;
 
     void Awake()
     {
         pauseManager = GameObject.FindGameObjectWithTag("Pause Manager").GetComponent<Controller_Pause_Manager>();
 
-        childObjectArray = new GameObject[this.transform.childCount];
-        for(int i = 0; i < childObjectArray.Length; i++)
+        childObjects = new GameObject[this.transform.childCount];
+        for(int i = 0; i < childObjects.Length; i++)
         {
-            childObjectArray[i] = this.transform.GetChild(i).gameObject;
+            childObjects[i] = this.transform.GetChild(i).gameObject;
         }
     }
 
@@ -36,9 +36,9 @@ public class Controller_Pause_Overlay : MonoBehaviour
         if(wasPaused != pauseManager.IsPaused)
         {
             wasPaused = pauseManager.IsPaused;
-            for(int i = 0; i < childObjectArray.Length; i++)
+            for(int i = 0; i < childObjects.Length; i++)
             {
-                childObjectArray[i].SetActive(wasPaused);
+                childObjects[i].SetActive(wasPaused);
             }
         }
     }

@@ -16,7 +16,7 @@ public class Controller_Enemy : MonoBehaviour
     [SerializeField, Tooltip("The amount of time that the fire delay is reduced with when the difficulty increases, in Seconds.")]
     private float fireDelayDifficultyModifier = 1.0f;
     [SerializeField, Tooltip("The list containing the projectile objects in descending projectile type order.")]
-    private List<GameObject> projectileObjList = new List<GameObject>();
+    private List<GameObject> projectileObjs = new List<GameObject>();
 
     /// <summary>
     /// A reference to the difficulty managers script component.
@@ -33,7 +33,7 @@ public class Controller_Enemy : MonoBehaviour
     /// <summary>
     /// The list containing the ProjectileData to be used.
     /// </summary>
-    private List<ProjectileData> projectileDataList = new List<ProjectileData>();
+    private List<ProjectileData> projectileDatas = new List<ProjectileData>();
     /// <summary>
     /// A reference to the local Transform component.
     /// </summary>
@@ -63,7 +63,7 @@ public class Controller_Enemy : MonoBehaviour
         fireTimer += Time.deltaTime;
         if (fireTimer >= currentFireDelay)
         {
-            foreach (ProjectileData projData in projectileDataList)
+            foreach (ProjectileData projData in projectileDatas)
             {
                 SpawnProjectile(projData, localTransform.position);
             }
@@ -80,7 +80,7 @@ public class Controller_Enemy : MonoBehaviour
     {
         if (_projectileDataList != null && _projectileDataList.Count > 0)
         {
-            projectileDataList = new List<ProjectileData>(_projectileDataList);
+            projectileDatas = new List<ProjectileData>(_projectileDataList);
         }
     }
 
@@ -145,7 +145,7 @@ public class Controller_Enemy : MonoBehaviour
         Vector3 actualSpawnPos = spawnerPosition + relativeSpawnPos;
 
         int projectileType = projData.ProjectileType;
-        GameObject projectileObj = projectileObjList[projectileType];
+        GameObject projectileObj = projectileObjs[projectileType];
 
         if (projectileType == 0)
         {
